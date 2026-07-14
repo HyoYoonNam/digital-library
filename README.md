@@ -1,4 +1,4 @@
-# digital-library
+# Digital Library
 
 Search books through the [Aladin](https://www.aladin.co.kr/) open API, generate
 richly-populated notes with cover images and metadata, and browse your reading
@@ -21,7 +21,7 @@ You need your own **Aladin TTB key** (a personal open API key):
 1. Sign in at [aladin.co.kr](https://www.aladin.co.kr/) and open the
    [open API page](https://blog.aladin.co.kr/openapi/).
 2. Request an API key. Aladin issues a TTB key that looks like `ttbyourid1234001`.
-3. Copy the key into **Settings → Aladin Book Search → Aladin TTB key**.
+3. Copy the key into **Settings → Digital Library → Aladin TTB key**.
 
 The key is required for every search and is stored only in your vault. See
 [Security](#security) below.
@@ -30,7 +30,7 @@ The key is required for every search and is stored only in your vault. See
 
 1. Install the plugin (from the Community Plugins store, or manually by copying
    `main.js`, `manifest.json`, and `styles.css` into
-   `<vault>/.obsidian/plugins/aladin-book-search/`).
+   `<vault>/.obsidian/plugins/digital-library/`).
 2. Enable it in **Settings → Community plugins**.
 3. Enter your TTB key and, optionally, adjust the library/cover folders, cover
    download behavior, search target, and interface language.
@@ -91,7 +91,7 @@ Click a card to open its note. The leading **+** tile launches a book search.
 
 ### Hotkeys
 
-Under **Settings → Aladin Book Search → Command hotkeys** you can assign a
+Under **Settings → Digital Library → Command hotkeys** you can assign a
 shortcut to each command (search, open library, create library note) so they run
 directly without the command palette. Click a command's button and press the key
 combination. The same shortcuts also appear in Obsidian's native Hotkeys settings.
@@ -105,12 +105,12 @@ npm run build   # type-check + production bundle
 ```
 
 For local testing, symlink `main.js`, `manifest.json`, and `styles.css` into a
-test vault's `.obsidian/plugins/aladin-book-search/` folder and reload Obsidian.
+test vault's `.obsidian/plugins/digital-library/` folder and reload Obsidian.
 
 ## Security
 
 Obsidian has no secure secret storage, so your **TTB key is stored in plain
-text** in this vault's `.obsidian/plugins/aladin-book-search/data.json`.
+text** in this vault's `.obsidian/plugins/digital-library/data.json`.
 
 - Use a key you can revoke or regenerate from your Aladin account.
 - Exclude `data.json` from any sync service you do not fully trust.
