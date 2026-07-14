@@ -4,7 +4,7 @@ import { getTranslation } from "./i18n";
 import { LibraryRenderer } from "./library-renderer";
 
 export const VIEW_TYPE_LIBRARY = "aladin-library-view";
-export const LIBRARY_CODE_BLOCK = "aladin-library";
+export const LIBRARY_CODE_BLOCK = "digital-library";
 
 export class LibraryView extends ItemView {
 	private plugin: AladinBookSearchPlugin;
@@ -46,7 +46,7 @@ export class LibraryView extends ItemView {
 }
 
 /**
- * Renders the library gallery inside an `aladin-library` markdown code block,
+ * Renders the library gallery inside a `digital-library` markdown code block,
  * so a physical note can act as an openable library dashboard.
  */
 export class LibraryCodeBlockChild extends MarkdownRenderChild {

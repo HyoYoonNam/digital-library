@@ -18,7 +18,7 @@ interface BookEntry {
 /**
  * Renders the book library as a card gallery into any container element.
  * Filter/sort state lives on the instance so it survives re-renders. Shared by
- * the dedicated library view and the `aladin-library` markdown code block.
+ * the dedicated library view and the `digital-library` markdown code block.
  */
 export class LibraryRenderer {
 	private filterText = "";
