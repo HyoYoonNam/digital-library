@@ -1,3 +1,5 @@
+import { getLanguage } from "obsidian";
+
 export type Language = "auto" | "en" | "ko" | "ja" | "zh";
 
 export const LANGUAGE_OPTIONS: Record<Language, string> = {
@@ -288,7 +290,7 @@ function resolveLanguage(language: Language): Exclude<Language, "auto"> {
 	if (language !== "auto") {
 		return language;
 	}
-	const locale = window.localStorage.getItem("language") ?? "en";
+	const locale = getLanguage();
 	if (locale.startsWith("ko")) return "ko";
 	if (locale.startsWith("ja")) return "ja";
 	if (locale.startsWith("zh")) return "zh";
