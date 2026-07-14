@@ -70,10 +70,22 @@ and fill in `started` / `finished` dates to sort your shelf.
 
 ### Browse your library
 
-- Click the **library** ribbon icon, or run **Open library view**.
-- Books render as a cover-first card grid. Filter by title/author, filter by
-  reading status, and sort by title, author, started, or finished date.
-- Click a card to open its note.
+There are two ways to open the gallery:
+
+- **As a view:** click the **library** ribbon icon, or run **Open library view**.
+- **As a physical note:** run **Create a library note** once to generate a note
+  containing an `aladin-library` code block. Open that note from the file
+  explorer any time to render the gallery — handy if you want the shelf pinned
+  in your vault like a dashboard. You can also drop the block into any note:
+
+  ````markdown
+  ```aladin-library
+  ```
+  ````
+
+Either way, books render as a cover-first card grid. Filter by title/author,
+filter by reading status, and sort by title, author, started, or finished date.
+Click a card to open its note.
 
 ## Development
 

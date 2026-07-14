@@ -12,6 +12,8 @@ export interface Translation {
 	// commands / ribbon
 	searchCommand: string;
 	openLibraryCommand: string;
+	createLibraryNoteCommand: string;
+	libraryNoteTitle: string;
 	ribbonTooltip: string;
 	// search modal
 	searchPlaceholder: string;
@@ -64,6 +66,8 @@ export interface Translation {
 const en: Translation = {
 	searchCommand: "Search for a book",
 	openLibraryCommand: "Open library view",
+	createLibraryNoteCommand: "Create a library note",
+	libraryNoteTitle: "Library",
 	ribbonTooltip: "Open library",
 	searchPlaceholder: "Type a book title to search Aladin…",
 	searchInstructionsNav: "to navigate",
@@ -113,6 +117,8 @@ const en: Translation = {
 const ko: Translation = {
 	searchCommand: "도서 검색",
 	openLibraryCommand: "서재 뷰 열기",
+	createLibraryNoteCommand: "서재 노트 만들기",
+	libraryNoteTitle: "서재",
 	ribbonTooltip: "서재 열기",
 	searchPlaceholder: "알라딘에서 검색할 도서 제목을 입력하세요…",
 	searchInstructionsNav: "이동",
@@ -162,6 +168,8 @@ const ko: Translation = {
 const ja: Translation = {
 	searchCommand: "書籍を検索",
 	openLibraryCommand: "ライブラリを開く",
+	createLibraryNoteCommand: "ライブラリノートを作成",
+	libraryNoteTitle: "ライブラリ",
 	ribbonTooltip: "ライブラリを開く",
 	searchPlaceholder: "Aladinで検索する書名を入力…",
 	searchInstructionsNav: "移動",
@@ -211,6 +219,8 @@ const ja: Translation = {
 const zh: Translation = {
 	searchCommand: "搜索图书",
 	openLibraryCommand: "打开书库视图",
+	createLibraryNoteCommand: "创建书库笔记",
+	libraryNoteTitle: "书库",
 	ribbonTooltip: "打开书库",
 	searchPlaceholder: "输入书名以在 Aladin 搜索…",
 	searchInstructionsNav: "导航",
