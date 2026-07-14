@@ -1,0 +1,16 @@
+# build output (attached to releases only, not committed)
+main.js
+*.js.map
+
+# dependencies
+node_modules/
+
+# agent-only reference material, not for distribution
+.agent-reference/
+
+# OMC operational state
+.omc/
+
+# misc
+.DS_Store
+data.json
