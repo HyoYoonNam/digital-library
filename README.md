@@ -1,4 +1,4 @@
-# Aladin Book Search
+# digital-library
 
 Search books through the [Aladin](https://www.aladin.co.kr/) open API, generate
 richly-populated notes with cover images and metadata, and browse your reading
