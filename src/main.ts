@@ -34,6 +34,28 @@ export default class AladinBookSearchPlugin extends Plugin {
 
 		this.registerCommands();
 		this.addSettingTab(new AladinBookSearchSettingTab(this.app, this));
+
+		// Create the library dashboard note once, after the vault is ready.
+		this.app.workspace.onLayoutReady(() => void this.initLibraryNote());
+	}
+
+	private libraryNotePath(): string {
+		const t = getTranslation(this.settings.language);
+		return normalizePath(`${t.libraryNoteTitle}.md`);
+	}
+
+	/** Auto-creates the library note on first run only; never recreates it. */
+	private async initLibraryNote(): Promise<void> {
+		if (this.settings.libraryNoteInitialized) {
+			return;
+		}
+		this.settings.libraryNoteInitialized = true;
+		await this.saveSettings();
+
+		const path = this.libraryNotePath();
+		if (!this.app.vault.getAbstractFileByPath(path)) {
+			await this.app.vault.create(path, "```" + LIBRARY_CODE_BLOCK + "\n```\n");
+		}
 	}
 
 	/**
@@ -80,8 +102,7 @@ export default class AladinBookSearchPlugin extends Plugin {
 	 * library code block, giving users a file they can open from the explorer.
 	 */
 	async createLibraryNote(): Promise<void> {
-		const t = getTranslation(this.settings.language);
-		const path = normalizePath(`${t.libraryNoteTitle}.md`);
+		const path = this.libraryNotePath();
 
 		let file = this.app.vault.getAbstractFileByPath(path);
 		if (!(file instanceof TFile)) {

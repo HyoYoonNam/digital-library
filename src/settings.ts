@@ -17,6 +17,8 @@ export interface AladinBookSearchSettings {
 	searchTarget: SearchTarget;
 	language: Language;
 	hotkeys: CommandHotkeys;
+	/** True once the startup library note has been created, so it is only auto-created once. */
+	libraryNoteInitialized: boolean;
 }
 
 export const DEFAULT_SETTINGS: AladinBookSearchSettings = {
@@ -27,6 +29,7 @@ export const DEFAULT_SETTINGS: AladinBookSearchSettings = {
 	searchTarget: "All",
 	language: "auto",
 	hotkeys: { search: null, openLibrary: null, createNote: null },
+	libraryNoteInitialized: false,
 };
 
 /** Builds a Hotkey from a captured keydown event, honoring the platform. */

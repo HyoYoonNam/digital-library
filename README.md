@@ -73,10 +73,12 @@ and fill in `started` / `finished` dates to sort your shelf.
 There are two ways to open the gallery:
 
 - **As a view:** click the **library** ribbon icon, or run **Open library view**.
-- **As a physical note:** run **Create a library note** once to generate a note
-  containing an `aladin-library` code block. Open that note from the file
-  explorer any time to render the gallery — handy if you want the shelf pinned
-  in your vault like a dashboard. You can also drop the block into any note:
+- **As a physical note:** on first run the plugin creates a library note (named
+  "Library" in your chosen language) containing an `aladin-library` code block.
+  Open it from the file explorer any time to render the gallery — handy if you
+  want the shelf pinned in your vault like a dashboard. If you delete it, it is
+  not recreated; run **Create a library note** to make it again. You can also
+  drop the block into any note:
 
   ````markdown
   ```aladin-library
