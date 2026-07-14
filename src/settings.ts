@@ -5,7 +5,7 @@ import { getTranslation, LANGUAGE_OPTIONS, Language, Translation } from "./i18n"
 export type SearchTarget = "All" | "Book";
 
 /** Commands whose hotkey can be configured from the settings tab. */
-export type CommandKey = "search" | "openLibrary" | "createNote";
+export type CommandKey = "search" | "openLibrary";
 
 export type CommandHotkeys = Record<CommandKey, Hotkey | null>;
 
@@ -28,7 +28,7 @@ export const DEFAULT_SETTINGS: AladinBookSearchSettings = {
 	downloadCover: true,
 	searchTarget: "All",
 	language: "auto",
-	hotkeys: { search: null, openLibrary: null, createNote: null },
+	hotkeys: { search: null, openLibrary: null },
 	libraryNoteInitialized: false,
 };
 
@@ -104,6 +104,18 @@ export class AladinBookSearchSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
+			.setName(t.createLibraryNoteCommand)
+			.setDesc(t.createLibraryNoteDesc)
+			.addButton((button) =>
+				button
+					.setButtonText(t.createLibraryNoteCta)
+					.setCta()
+					.onClick(() => {
+						void this.plugin.createLibraryNote();
+					}),
+			);
+
+		new Setting(containerEl)
 			.setName(t.settingsCoverFolderName)
 			.setDesc(t.settingsCoverFolderDesc)
 			.addText((text) =>
@@ -164,7 +176,6 @@ export class AladinBookSearchSettingTab extends PluginSettingTab {
 
 		this.addHotkeySetting(containerEl, t, "search", t.searchCommand);
 		this.addHotkeySetting(containerEl, t, "openLibrary", t.openLibraryCommand);
-		this.addHotkeySetting(containerEl, t, "createNote", t.createLibraryNoteCommand);
 	}
 
 	private addHotkeySetting(

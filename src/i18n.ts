@@ -13,6 +13,8 @@ export interface Translation {
 	searchCommand: string;
 	openLibraryCommand: string;
 	createLibraryNoteCommand: string;
+	createLibraryNoteDesc: string;
+	createLibraryNoteCta: string;
 	libraryNoteTitle: string;
 	ribbonTooltip: string;
 	// search modal
@@ -73,6 +75,8 @@ const en: Translation = {
 	searchCommand: "Search for a book",
 	openLibraryCommand: "Open library view",
 	createLibraryNoteCommand: "Create a library note",
+	createLibraryNoteDesc: "Create the library dashboard note now, or open it if it already exists.",
+	createLibraryNoteCta: "Create",
 	libraryNoteTitle: "Library",
 	ribbonTooltip: "Open library",
 	searchPlaceholder: "Type a book title to search Aladin…",
@@ -131,6 +135,8 @@ const ko: Translation = {
 	searchCommand: "도서 검색",
 	openLibraryCommand: "서재 뷰 열기",
 	createLibraryNoteCommand: "서재 노트 만들기",
+	createLibraryNoteDesc: "서재 대시보드 노트를 지금 생성합니다. 이미 있으면 엽니다.",
+	createLibraryNoteCta: "생성",
 	libraryNoteTitle: "서재",
 	ribbonTooltip: "서재 열기",
 	searchPlaceholder: "알라딘에서 검색할 도서 제목을 입력하세요…",
@@ -189,6 +195,8 @@ const ja: Translation = {
 	searchCommand: "書籍を検索",
 	openLibraryCommand: "ライブラリを開く",
 	createLibraryNoteCommand: "ライブラリノートを作成",
+	createLibraryNoteDesc: "ライブラリのダッシュボードノートを今すぐ作成します。既にある場合は開きます。",
+	createLibraryNoteCta: "作成",
 	libraryNoteTitle: "ライブラリ",
 	ribbonTooltip: "ライブラリを開く",
 	searchPlaceholder: "Aladinで検索する書名を入力…",
@@ -247,6 +255,8 @@ const zh: Translation = {
 	searchCommand: "搜索图书",
 	openLibraryCommand: "打开书库视图",
 	createLibraryNoteCommand: "创建书库笔记",
+	createLibraryNoteDesc: "立即创建书库仪表盘笔记。若已存在则打开。",
+	createLibraryNoteCta: "创建",
 	libraryNoteTitle: "书库",
 	ribbonTooltip: "打开书库",
 	searchPlaceholder: "输入书名以在 Aladin 搜索…",

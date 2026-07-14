@@ -90,7 +90,6 @@ export default class AladinBookSearchPlugin extends Plugin {
 		this.addCommand({
 			id: "create-library-note",
 			name: t.createLibraryNoteCommand,
-			hotkeys: toHotkeys(this.settings.hotkeys.createNote),
 			callback: () => void this.createLibraryNote(),
 		});
 
