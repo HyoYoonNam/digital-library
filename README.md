@@ -85,7 +85,14 @@ There are two ways to open the gallery:
 
 Either way, books render as a cover-first card grid. Filter by title/author,
 filter by reading status, and sort by title, author, started, or finished date.
-Click a card to open its note.
+Click a card to open its note. The leading **+** tile launches a book search.
+
+### Hotkeys
+
+Under **Settings → Aladin Book Search → Command hotkeys** you can assign a
+shortcut to each command (search, open library, create library note) so they run
+directly without the command palette. Click a command's button and press the key
+combination. The same shortcuts also appear in Obsidian's native Hotkeys settings.
 
 ## Development
 

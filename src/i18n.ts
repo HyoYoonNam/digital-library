@@ -62,6 +62,11 @@ export interface Translation {
 	settingsSearchTargetBook: string;
 	settingsLanguageName: string;
 	settingsLanguageDesc: string;
+	hotkeysHeading: string;
+	hotkeysHint: string;
+	hotkeyBlank: string;
+	hotkeyPrompt: string;
+	hotkeyClear: string;
 }
 
 const en: Translation = {
@@ -114,6 +119,12 @@ const en: Translation = {
 	settingsSearchTargetBook: "Korean books only",
 	settingsLanguageName: "Language",
 	settingsLanguageDesc: "Language used for this plugin's interface.",
+	hotkeysHeading: "Command hotkeys",
+	hotkeysHint:
+		"Assign a shortcut to run each command directly, without the command palette. Click a button and press the key combination. These also appear in Obsidian's Hotkeys settings.",
+	hotkeyBlank: "Blank",
+	hotkeyPrompt: "Press keys… (Esc to cancel)",
+	hotkeyClear: "Clear",
 };
 
 const ko: Translation = {
@@ -166,6 +177,12 @@ const ko: Translation = {
 	settingsSearchTargetBook: "국내 도서만",
 	settingsLanguageName: "언어",
 	settingsLanguageDesc: "이 플러그인 인터페이스에 사용할 언어입니다.",
+	hotkeysHeading: "명령 단축키",
+	hotkeysHint:
+		"명령 팔레트를 거치지 않고 각 명령을 바로 실행할 단축키를 지정합니다. 버튼을 누른 뒤 키 조합을 누르세요. 옵시디언 단축키 설정에도 함께 표시됩니다.",
+	hotkeyBlank: "지정 안 됨",
+	hotkeyPrompt: "키를 누르세요… (Esc 취소)",
+	hotkeyClear: "지우기",
 };
 
 const ja: Translation = {
@@ -218,6 +235,12 @@ const ja: Translation = {
 	settingsSearchTargetBook: "韓国書籍のみ",
 	settingsLanguageName: "言語",
 	settingsLanguageDesc: "このプラグインのインターフェースに使う言語です。",
+	hotkeysHeading: "コマンドのショートカット",
+	hotkeysHint:
+		"コマンドパレットを使わずに各コマンドを直接実行するショートカットを割り当てます。ボタンを押してからキーの組み合わせを押してください。Obsidianのホットキー設定にも表示されます。",
+	hotkeyBlank: "未設定",
+	hotkeyPrompt: "キーを押してください…（Escで取消）",
+	hotkeyClear: "クリア",
 };
 
 const zh: Translation = {
@@ -270,6 +293,12 @@ const zh: Translation = {
 	settingsSearchTargetBook: "仅韩国图书",
 	settingsLanguageName: "语言",
 	settingsLanguageDesc: "此插件界面使用的语言。",
+	hotkeysHeading: "命令快捷键",
+	hotkeysHint:
+		"为每个命令分配可直接运行的快捷键，无需命令面板。点击按钮后按下组合键。这些快捷键也会显示在 Obsidian 的快捷键设置中。",
+	hotkeyBlank: "未设置",
+	hotkeyPrompt: "请按键…（Esc 取消）",
+	hotkeyClear: "清除",
 };
 
 const TRANSLATIONS: Record<Exclude<Language, "auto">, Translation> = { en, ko, ja, zh };
