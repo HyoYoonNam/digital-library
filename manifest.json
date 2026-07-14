@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "minAppVersion": "1.7.2",
   "description": "Search books through the Aladin open API, generate notes with cover images and metadata, and browse your library in a card gallery view.",
-  "author": "rudevico",
-  "authorUrl": "https://github.com/rudevico",
+  "author": "HyoYoonNam",
+  "authorUrl": "https://github.com/HyoYoonNam",
   "isDesktopOnly": false
 }
