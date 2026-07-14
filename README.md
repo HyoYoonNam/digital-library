@@ -91,10 +91,8 @@ Click a card to open its note. The leading **+** tile launches a book search.
 
 ### Hotkeys
 
-Under **Settings → Digital Library → Command hotkeys** you can assign a
-shortcut to each command (search, open library, create library note) so they run
-directly without the command palette. Click a command's button and press the key
-combination. The same shortcuts also appear in Obsidian's native Hotkeys settings.
+To run a command with a keyboard shortcut, assign one under Obsidian's
+**Settings → Hotkeys** and search for "Digital Library".
 
 ## Development
 

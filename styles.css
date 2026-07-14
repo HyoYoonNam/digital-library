@@ -10,14 +10,6 @@
 	line-height: 1.5;
 }
 
-/* Settings: hotkeys section hint */
-.aladin-hotkeys-hint {
-	margin: -0.25em 0 0.75em;
-	color: var(--text-muted);
-	font-size: var(--font-ui-small);
-	line-height: 1.5;
-}
-
 /* Search modal suggestions */
 .aladin-suggestion-title {
 	font-weight: var(--font-semibold);

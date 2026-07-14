@@ -1,4 +1,4 @@
-import { Hotkey, Plugin, TFile, WorkspaceLeaf, normalizePath } from "obsidian";
+import { Plugin, TFile, WorkspaceLeaf, normalizePath } from "obsidian";
 import {
 	AladinBookSearchSettings,
 	AladinBookSearchSettingTab,
@@ -15,7 +15,6 @@ import { getTranslation } from "./i18n";
 
 export default class AladinBookSearchPlugin extends Plugin {
 	settings: AladinBookSearchSettings = DEFAULT_SETTINGS;
-	private commandsRegistered = false;
 
 	async onload(): Promise<void> {
 		await this.loadSettings();
@@ -32,7 +31,24 @@ export default class AladinBookSearchPlugin extends Plugin {
 			void this.activateLibraryView();
 		});
 
-		this.registerCommands();
+		this.addCommand({
+			id: "search-book",
+			name: t.searchCommand,
+			callback: () => this.openBookSearch(),
+		});
+
+		this.addCommand({
+			id: "open-library",
+			name: t.openLibraryCommand,
+			callback: () => void this.activateLibraryView(),
+		});
+
+		this.addCommand({
+			id: "create-library-note",
+			name: t.createLibraryNoteCommand,
+			callback: () => void this.createLibraryNote(),
+		});
+
 		this.addSettingTab(new AladinBookSearchSettingTab(this.app, this));
 
 		// Create the library dashboard note once, after the vault is ready.
@@ -56,44 +72,6 @@ export default class AladinBookSearchPlugin extends Plugin {
 		if (!this.app.vault.getAbstractFileByPath(path)) {
 			await this.app.vault.create(path, "```" + LIBRARY_CODE_BLOCK + "\n```\n");
 		}
-	}
-
-	/**
-	 * (Re-)registers all commands with the hotkeys currently stored in settings.
-	 * Obsidian handles the actual runtime hotkey binding via `Command.hotkeys`.
-	 */
-	registerCommands(): void {
-		const t = getTranslation(this.settings.language);
-		const ids = ["search-book", "open-library", "create-library-note"];
-		if (this.commandsRegistered) {
-			for (const id of ids) {
-				this.removeCommand(`${this.manifest.id}:${id}`);
-			}
-		}
-
-		const toHotkeys = (hotkey: Hotkey | null): Hotkey[] => (hotkey ? [hotkey] : []);
-
-		this.addCommand({
-			id: "search-book",
-			name: t.searchCommand,
-			hotkeys: toHotkeys(this.settings.hotkeys.search),
-			callback: () => this.openBookSearch(),
-		});
-
-		this.addCommand({
-			id: "open-library",
-			name: t.openLibraryCommand,
-			hotkeys: toHotkeys(this.settings.hotkeys.openLibrary),
-			callback: () => void this.activateLibraryView(),
-		});
-
-		this.addCommand({
-			id: "create-library-note",
-			name: t.createLibraryNoteCommand,
-			callback: () => void this.createLibraryNote(),
-		});
-
-		this.commandsRegistered = true;
 	}
 
 	/**
@@ -131,8 +109,6 @@ export default class AladinBookSearchPlugin extends Plugin {
 	async loadSettings(): Promise<void> {
 		const data = await this.loadData();
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, data);
-		// Deep-merge nested hotkeys so a missing key falls back to its default.
-		this.settings.hotkeys = Object.assign({}, DEFAULT_SETTINGS.hotkeys, this.settings.hotkeys);
 	}
 
 	async saveSettings(): Promise<void> {
