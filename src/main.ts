@@ -81,11 +81,12 @@ export default class AladinBookSearchPlugin extends Plugin {
 	async createLibraryNote(): Promise<void> {
 		const path = this.libraryNotePath();
 
-		let file = this.app.vault.getAbstractFileByPath(path);
-		if (!(file instanceof TFile)) {
-			file = await this.app.vault.create(path, "```" + LIBRARY_CODE_BLOCK + "\n```\n");
-		}
-		await this.app.workspace.getLeaf(true).openFile(file as TFile);
+		const existing = this.app.vault.getAbstractFileByPath(path);
+		const file =
+			existing instanceof TFile
+				? existing
+				: await this.app.vault.create(path, "```" + LIBRARY_CODE_BLOCK + "\n```\n");
+		await this.app.workspace.getLeaf(true).openFile(file);
 	}
 
 	openBookSearch(): void {
@@ -107,7 +108,7 @@ export default class AladinBookSearchPlugin extends Plugin {
 	}
 
 	async loadSettings(): Promise<void> {
-		const data = await this.loadData();
+		const data = (await this.loadData()) as Partial<AladinBookSearchSettings> | null;
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, data);
 	}
 

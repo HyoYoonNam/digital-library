@@ -58,14 +58,18 @@ export class BookSearchModal extends SuggestModal<AladinItem> {
 
 	renderSuggestion(book: AladinItem, el: HTMLElement): void {
 		const t = getTranslation(this.plugin.settings.language);
-		el.createEl("div", { text: book.title, cls: "aladin-suggestion-title" });
+		el.createDiv({ text: book.title, cls: "aladin-suggestion-title" });
 		el.createEl("small", {
 			text: book.author || t.unknownAuthor,
 			cls: "aladin-suggestion-author",
 		});
 	}
 
-	async onChooseSuggestion(book: AladinItem): Promise<void> {
+	onChooseSuggestion(book: AladinItem): void {
+		void this.createNoteFromBook(book);
+	}
+
+	private async createNoteFromBook(book: AladinItem): Promise<void> {
 		const t = getTranslation(this.plugin.settings.language);
 		new Notice(t.noticeCreating);
 

@@ -181,7 +181,7 @@ export class LibraryRenderer {
 	private renderCard(grid: HTMLElement, book: BookEntry, t: Translation): void {
 		const card = grid.createDiv({ cls: "aladin-card" });
 		card.addEventListener("click", () => {
-			this.app.workspace.getLeaf(true).openFile(book.file);
+			void this.app.workspace.getLeaf(true).openFile(book.file);
 		});
 
 		const coverWrap = card.createDiv({ cls: "aladin-card-cover" });
