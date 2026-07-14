@@ -1,4 +1,4 @@
-import { App, PluginSettingTab, Setting, SettingDefinitionItem } from "obsidian";
+import { App, PluginSettingTab, Setting } from "obsidian";
 import type AladinBookSearchPlugin from "./main";
 import { getTranslation, LANGUAGE_OPTIONS, Language } from "./i18n";
 
@@ -35,144 +35,110 @@ export class AladinBookSearchSettingTab extends PluginSettingTab {
 		this.plugin = plugin;
 	}
 
-	getControlValue(key: string): unknown {
-		const settings = this.plugin.settings;
-		switch (key) {
-			case "libraryFolder":
-				return settings.libraryFolder;
-			case "coverFolder":
-				return settings.coverFolder;
-			case "downloadCover":
-				return settings.downloadCover;
-			case "searchTarget":
-				return settings.searchTarget;
-			case "language":
-				return settings.language;
-			default:
-				return undefined;
-		}
-	}
-
-	async setControlValue(key: string, value: unknown): Promise<void> {
-		const settings = this.plugin.settings;
-		switch (key) {
-			case "libraryFolder":
-				settings.libraryFolder = String(value).trim() || DEFAULT_SETTINGS.libraryFolder;
-				break;
-			case "coverFolder":
-				settings.coverFolder = String(value).trim() || DEFAULT_SETTINGS.coverFolder;
-				break;
-			case "downloadCover":
-				settings.downloadCover = Boolean(value);
-				break;
-			case "searchTarget":
-				settings.searchTarget = value === "Book" ? "Book" : "All";
-				break;
-			case "language":
-				settings.language = value as Language;
-				break;
-		}
-		await this.plugin.saveSettings();
-		// Language changes relabel every setting, so rebuild the definitions.
-		if (key === "language") {
-			this.update();
-		}
-	}
-
-	getSettingDefinitions(): SettingDefinitionItem[] {
+	display(): void {
+		const { containerEl } = this;
 		const t = getTranslation(this.plugin.settings.language);
-		return [
-			{
-				name: t.settingsTtbKeyName,
-				desc: t.settingsTtbKeyDesc,
-				aliases: ["aladin", "ttb", "api key"],
-				render: (setting: Setting) => {
-					setting
-						.addText((text) =>
-							text
-								.setPlaceholder(t.settingsTtbKeyPlaceholder)
-								.setValue(this.plugin.settings.ttbKey)
-								.onChange(async (value) => {
-									this.plugin.settings.ttbKey = value.trim();
-									await this.plugin.saveSettings();
-								}),
-						)
-						.addButton((button) =>
-							button
-								.setButtonText(t.settingsGetKey)
-								.onClick(() => window.open(ALADIN_BLOG_URL)),
-						);
-				},
-			},
-			{
-				name: "",
-				searchable: false,
-				render: (setting: Setting) => {
-					// Full-width plain-text storage warning box.
-					setting.settingEl.empty();
-					setting.settingEl.removeClass("setting-item");
-					setting.settingEl.createDiv({
-						cls: "aladin-security-warning",
-						text: t.settingsSecurityWarning,
+		containerEl.empty();
+
+		new Setting(containerEl)
+			.setName(t.settingsTtbKeyName)
+			.setDesc(t.settingsTtbKeyDesc)
+			.addText((text) =>
+				text
+					.setPlaceholder(t.settingsTtbKeyPlaceholder)
+					.setValue(this.plugin.settings.ttbKey)
+					.onChange(async (value) => {
+						this.plugin.settings.ttbKey = value.trim();
+						await this.plugin.saveSettings();
+					}),
+			)
+			.addButton((button) =>
+				button
+					.setButtonText(t.settingsGetKey)
+					.onClick(() => window.open(ALADIN_BLOG_URL)),
+			);
+
+		// Plain-text storage warning box.
+		const warning = containerEl.createDiv({ cls: "aladin-security-warning" });
+		warning.setText(t.settingsSecurityWarning);
+
+		new Setting(containerEl)
+			.setName(t.settingsLibraryFolderName)
+			.setDesc(t.settingsLibraryFolderDesc)
+			.addText((text) =>
+				text
+					.setValue(this.plugin.settings.libraryFolder)
+					.onChange(async (value) => {
+						this.plugin.settings.libraryFolder = value.trim() || DEFAULT_SETTINGS.libraryFolder;
+						await this.plugin.saveSettings();
+					}),
+			);
+
+		new Setting(containerEl)
+			.setName(t.createLibraryNoteCommand)
+			.setDesc(t.createLibraryNoteDesc)
+			.addButton((button) =>
+				button
+					.setButtonText(t.createLibraryNoteCta)
+					.setCta()
+					.onClick(() => {
+						void this.plugin.createLibraryNote();
+					}),
+			);
+
+		new Setting(containerEl)
+			.setName(t.settingsCoverFolderName)
+			.setDesc(t.settingsCoverFolderDesc)
+			.addText((text) =>
+				text
+					.setValue(this.plugin.settings.coverFolder)
+					.onChange(async (value) => {
+						this.plugin.settings.coverFolder = value.trim() || DEFAULT_SETTINGS.coverFolder;
+						await this.plugin.saveSettings();
+					}),
+			);
+
+		new Setting(containerEl)
+			.setName(t.settingsDownloadCoverName)
+			.setDesc(t.settingsDownloadCoverDesc)
+			.addToggle((toggle) =>
+				toggle
+					.setValue(this.plugin.settings.downloadCover)
+					.onChange(async (value) => {
+						this.plugin.settings.downloadCover = value;
+						await this.plugin.saveSettings();
+					}),
+			);
+
+		new Setting(containerEl)
+			.setName(t.settingsSearchTargetName)
+			.setDesc(t.settingsSearchTargetDesc)
+			.addDropdown((dropdown) =>
+				dropdown
+					.addOption("All", t.settingsSearchTargetAll)
+					.addOption("Book", t.settingsSearchTargetBook)
+					.setValue(this.plugin.settings.searchTarget)
+					.onChange(async (value) => {
+						this.plugin.settings.searchTarget = value as SearchTarget;
+						await this.plugin.saveSettings();
+					}),
+			);
+
+		new Setting(containerEl)
+			.setName(t.settingsLanguageName)
+			.setDesc(t.settingsLanguageDesc)
+			.addDropdown((dropdown) => {
+				(Object.keys(LANGUAGE_OPTIONS) as Language[]).forEach((lang) => {
+					dropdown.addOption(lang, LANGUAGE_OPTIONS[lang]);
+				});
+				dropdown
+					.setValue(this.plugin.settings.language)
+					.onChange(async (value) => {
+						this.plugin.settings.language = value as Language;
+						await this.plugin.saveSettings();
+						// Re-render settings so labels reflect the new language.
+						this.display();
 					});
-				},
-			},
-			{
-				name: t.settingsLibraryFolderName,
-				desc: t.settingsLibraryFolderDesc,
-				control: {
-					type: "folder",
-					key: "libraryFolder",
-					defaultValue: DEFAULT_SETTINGS.libraryFolder,
-				},
-			},
-			{
-				name: t.createLibraryNoteCommand,
-				desc: t.createLibraryNoteDesc,
-				render: (setting: Setting) => {
-					setting.addButton((button) =>
-						button
-							.setButtonText(t.createLibraryNoteCta)
-							.setCta()
-							.onClick(() => void this.plugin.createLibraryNote()),
-					);
-				},
-			},
-			{
-				name: t.settingsCoverFolderName,
-				desc: t.settingsCoverFolderDesc,
-				control: {
-					type: "folder",
-					key: "coverFolder",
-					defaultValue: DEFAULT_SETTINGS.coverFolder,
-				},
-			},
-			{
-				name: t.settingsDownloadCoverName,
-				desc: t.settingsDownloadCoverDesc,
-				control: { type: "toggle", key: "downloadCover" },
-			},
-			{
-				name: t.settingsSearchTargetName,
-				desc: t.settingsSearchTargetDesc,
-				control: {
-					type: "dropdown",
-					key: "searchTarget",
-					options: {
-						All: t.settingsSearchTargetAll,
-						Book: t.settingsSearchTargetBook,
-					},
-				},
-			},
-			{
-				name: t.settingsLanguageName,
-				desc: t.settingsLanguageDesc,
-				control: {
-					type: "dropdown",
-					key: "language",
-					options: LANGUAGE_OPTIONS,
-				},
-			},
-		];
+			});
 	}
 }
