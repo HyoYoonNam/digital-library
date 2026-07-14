@@ -1,6 +1,6 @@
 {
   "name": "digital-library",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Search books through the Aladin open API and build a card gallery library in Obsidian.",
   "main": "main.js",
   "scripts": {
