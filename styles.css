@@ -89,6 +89,33 @@
 	font-size: var(--font-ui-small);
 }
 
+/* "Add a book" tile */
+.aladin-card-add {
+	background-color: transparent;
+	border: 1px dashed var(--background-modifier-border);
+}
+
+.aladin-card-add:hover {
+	border-color: var(--interactive-accent);
+}
+
+.aladin-card-add-cover {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--background-secondary);
+}
+
+.aladin-card-add-plus {
+	font-size: 3em;
+	line-height: 1;
+	color: var(--text-muted);
+}
+
+.aladin-card-add:hover .aladin-card-add-plus {
+	color: var(--interactive-accent);
+}
+
 .aladin-card-info {
 	padding: var(--size-4-2);
 }

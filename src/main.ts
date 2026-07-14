@@ -35,7 +35,7 @@ export default class AladinBookSearchPlugin extends Plugin {
 			id: "search-book",
 			name: t.searchCommand,
 			callback: () => {
-				new BookSearchModal(this.app, this).open();
+				this.openBookSearch();
 			},
 		});
 
@@ -71,6 +71,10 @@ export default class AladinBookSearchPlugin extends Plugin {
 			file = await this.app.vault.create(path, "```" + LIBRARY_CODE_BLOCK + "\n```\n");
 		}
 		await this.app.workspace.getLeaf(true).openFile(file as TFile);
+	}
+
+	openBookSearch(): void {
+		new BookSearchModal(this.app, this).open();
 	}
 
 	async activateLibraryView(): Promise<void> {

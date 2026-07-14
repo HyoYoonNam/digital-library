@@ -43,6 +43,7 @@ export interface Translation {
 	statusReading: string;
 	statusFinished: string;
 	unknownAuthor: string;
+	addBook: string;
 	// settings
 	settingsTtbKeyName: string;
 	settingsTtbKeyDesc: string;
@@ -94,6 +95,7 @@ const en: Translation = {
 	statusReading: "Reading",
 	statusFinished: "Finished",
 	unknownAuthor: "Unknown author",
+	addBook: "Add a book",
 	settingsTtbKeyName: "Aladin TTB key",
 	settingsTtbKeyDesc: "Your personal Aladin open API key (TTB key).",
 	settingsTtbKeyPlaceholder: "ttbyourkey…",
@@ -145,6 +147,7 @@ const ko: Translation = {
 	statusReading: "읽는 중",
 	statusFinished: "완독",
 	unknownAuthor: "저자 미상",
+	addBook: "책 추가",
 	settingsTtbKeyName: "알라딘 TTB 키",
 	settingsTtbKeyDesc: "개인 알라딘 오픈 API 키(TTB 키)입니다.",
 	settingsTtbKeyPlaceholder: "ttb내키…",
@@ -196,6 +199,7 @@ const ja: Translation = {
 	statusReading: "読書中",
 	statusFinished: "読了",
 	unknownAuthor: "著者不明",
+	addBook: "書籍を追加",
 	settingsTtbKeyName: "Aladin TTBキー",
 	settingsTtbKeyDesc: "個人のAladinオープンAPIキー（TTBキー）です。",
 	settingsTtbKeyPlaceholder: "ttbyourkey…",
@@ -247,6 +251,7 @@ const zh: Translation = {
 	statusReading: "在读",
 	statusFinished: "读完",
 	unknownAuthor: "作者不详",
+	addBook: "添加图书",
 	settingsTtbKeyName: "Aladin TTB 密钥",
 	settingsTtbKeyDesc: "你的个人 Aladin 开放 API 密钥（TTB 密钥）。",
 	settingsTtbKeyPlaceholder: "ttbyourkey…",

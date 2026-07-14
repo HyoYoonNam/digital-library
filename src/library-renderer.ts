@@ -152,14 +152,30 @@ export class LibraryRenderer {
 		container.querySelector(".aladin-library-empty")?.remove();
 
 		const books = this.filterAndSort(this.collectBooks());
-		if (books.length === 0) {
-			container.createDiv({ cls: "aladin-library-empty", text: t.libraryEmpty });
-			return;
-		}
 		const grid = container.createDiv({ cls: "aladin-card-grid" });
+
+		// The "+" tile leads the grid (the newest/top-left slot) and launches search.
+		this.renderAddCard(grid, t);
+
 		for (const book of books) {
 			this.renderCard(grid, book, t);
 		}
+
+		if (books.length === 0) {
+			container.createDiv({ cls: "aladin-library-empty", text: t.libraryEmpty });
+		}
+	}
+
+	private renderAddCard(grid: HTMLElement, t: Translation): void {
+		const card = grid.createDiv({ cls: "aladin-card aladin-card-add" });
+		card.setAttribute("aria-label", t.addBook);
+		card.addEventListener("click", () => this.plugin.openBookSearch());
+
+		const cover = card.createDiv({ cls: "aladin-card-cover aladin-card-add-cover" });
+		cover.createDiv({ cls: "aladin-card-add-plus", text: "+" });
+
+		const info = card.createDiv({ cls: "aladin-card-info" });
+		info.createDiv({ cls: "aladin-card-title", text: t.addBook });
 	}
 
 	private renderCard(grid: HTMLElement, book: BookEntry, t: Translation): void {
